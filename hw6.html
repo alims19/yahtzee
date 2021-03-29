@@ -1,0 +1,182 @@
+<!-- Ali Smith Section 4 -->
+<!-- This program plays a simple version of the game Yahtzee as it asks the user to input which number they want for Yahtzee.
+It then rolls 5 dice until they reach Yahtzee and then outputs how many times each die was rolled and the total number of rolls. -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Yahtzee!</title>
+
+    <!-- Creates background and centers text -->
+    <style>
+      .homebg {
+        background-image: url("background.jpeg");
+        background-size: cover;
+      }
+
+      h1 {
+        text-align: center;
+      }
+      input {
+        position: relative;
+        top: 50%;
+        left: 45%;
+      }
+      button {
+        position: relative;
+        top: 50%;
+        left: 48%;
+      }
+      img {
+        position: relative;
+        top: 50%;
+        left: 31%;
+      }
+    </style>
+
+    <!-- Title -->
+    <h1 style="font-family: 'Courier New', Courier, monospace">YAHTZEE</h1>
+
+    <p
+      style="
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 23px;
+        text-align: center;
+      "
+    >
+      What number do you want for Yahtzee?
+    </p>
+
+    <!-- Input number for yahtzee -->
+    <div class="input"><input type="text" id="yahtzee" autofocus /></div>
+    <br />
+
+    <div class="button">
+      <button type="button" onclick="rollTheDie()" style="text-align: center">
+        Click Me
+      </button>
+    </div>
+
+    <p id="dieRollCount"></p>
+    <p id="totalRolls"></p>
+
+    <!-- Dice images -->
+    <div class="img">
+      <img src="" id="dice1" style="vertical-align: middle" />
+      <img src="" id="dice2" style="vertical-align: middle" />
+      <img src="" id="dice3" style="vertical-align: middle" />
+      <img src="" id="dice4" style="vertical-align: middle" />
+      <img src="" id="dice5" style="vertical-align: middle" />
+    </div>
+  </head>
+
+  <body class="homebg">
+    <script>
+      // Changes color and font size of text
+      document.getElementById("dieRollCount").style.color = "black";
+      dieRollCount.style.fontSize = "25px";
+      document.getElementById("totalRolls").style.color = "white";
+      totalRolls.style.fontSize = "30px";
+
+      function rollTheDie() {
+        let iYahtzee;
+
+        iYahtzee = document.getElementById("yahtzee").value;
+
+        // Error message if yahtzee isn't between 1-6
+        if (iYahtzee < 1 || iYahtzee > 6) {
+          alert("Please enter a number between 1 and 6");
+          document.getElementById("yahtzee").focus();
+        } else {
+          oncePerDie(); // Calls function to start the game
+        }
+      }
+
+      function oncePerDie() {
+        let iYahtzee;
+        let rgiNumOfRolls = [];
+        let iTotalRolls = 0;
+        let iRollNum = 0;
+        let sOutput = " ";
+
+        iYahtzee = document.getElementById("yahtzee").value;
+
+        for (let iCount = 1; iCount <= 5; iCount++) {
+          rgiNumOfRolls[iCount] = 0;
+          do {
+            iRollNum = Math.floor(Math.random() * 6) + 1; // Generates and assigns random number to die
+
+            rgiNumOfRolls[iCount] += 1; // Adds number of rolls
+            iTotalRolls += 1; // Adds to total number of rolls
+          } while (iRollNum != iYahtzee);
+
+          // Outputs for each die
+          sOutput +=
+            "Dice " + iCount + " rolls = " + rgiNumOfRolls[iCount] + "<br>";
+
+          document.getElementById("dieRollCount").innerHTML = sOutput;
+          document.getElementById("dieRollCount").style.fontFamily =
+            "Courier New";
+          document.getElementById("dieRollCount").style.textAlign = "center";
+          document.getElementById("dieRollCount").style.fontWeight = "bold";
+          document.getElementById("dieRollCount").style.fontSize = "26px";
+
+          // Outputs total number of rolls at the end of rolling die 5
+          if (iCount == 5) {
+            document.getElementById("totalRolls").innerHTML =
+              "Total Number of Rolls:" + "<br>" + iTotalRolls;
+            document.getElementById("totalRolls").style.fontFamily =
+              "Courier New";
+            document.getElementById("totalRolls").style.textAlign = "center";
+            document.getElementById("totalRolls").style.fontWeight = "bold";
+            document.getElementById("totalRolls").style.fontSize = "41px";
+          }
+        }
+
+        // Checks yahtzee number and prints corresponding die images
+        if (iYahtzee == 1) {
+          document.getElementById("dice1").src = "dice1.jpg";
+          document.getElementById("dice2").src = "dice1.jpg";
+          document.getElementById("dice3").src = "dice1.jpg";
+          document.getElementById("dice4").src = "dice1.jpg";
+          document.getElementById("dice5").src = "dice1.jpg";
+        }
+        if (iYahtzee == 2) {
+          document.getElementById("dice1").src = "dice2.jpg";
+          document.getElementById("dice2").src = "dice2.jpg";
+          document.getElementById("dice3").src = "dice2.jpg";
+          document.getElementById("dice4").src = "dice2.jpg";
+          document.getElementById("dice5").src = "dice2.jpg";
+        }
+        if (iYahtzee == 3) {
+          document.getElementById("dice1").src = "dice3.jpg";
+          document.getElementById("dice2").src = "dice3.jpg";
+          document.getElementById("dice3").src = "dice3.jpg";
+          document.getElementById("dice4").src = "dice3.jpg";
+          document.getElementById("dice5").src = "dice3.jpg";
+        }
+        if (iYahtzee == 4) {
+          document.getElementById("dice1").src = "dice4.jpg";
+          document.getElementById("dice2").src = "dice4.jpg";
+          document.getElementById("dice3").src = "dice4.jpg";
+          document.getElementById("dice4").src = "dice4.jpg";
+          document.getElementById("dice5").src = "dice4.jpg";
+        }
+        if (iYahtzee == 5) {
+          document.getElementById("dice1").src = "dice5.jpg";
+          document.getElementById("dice2").src = "dice5.jpg";
+          document.getElementById("dice3").src = "dice5.jpg";
+          document.getElementById("dice4").src = "dice5.jpg";
+          document.getElementById("dice5").src = "dice5.jpg";
+        }
+        if (iYahtzee == 6) {
+          document.getElementById("dice1").src = "dice6.jpg";
+          document.getElementById("dice2").src = "dice6.jpg";
+          document.getElementById("dice3").src = "dice6.jpg";
+          document.getElementById("dice4").src = "dice6.jpg";
+          document.getElementById("dice5").src = "dice6.jpg";
+        }
+      }
+    </script>
+  </body>
+</html>
